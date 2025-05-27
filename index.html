@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Risk Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+    }
+    button {
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Simple Risk Calculator</h2>
+    <input type="number" id="pips" placeholder="Enter pips" />
+    <input type="number" id="risk" placeholder="Enter risk in $" />
+    <button onclick="calculateLotSize()">Calculate</button>
+    <div class="result" id="result"></div>
+  </div>  <script>
+    function calculateLotSize() {
+      const pips = parseFloat(document.getElementById('pips').value);
+      const risk = parseFloat(document.getElementById('risk').value);
+
+      if (isNaN(pips) || isNaN(risk) || pips <= 0 || risk <= 0) {
+        document.getElementById('result').textContent = 'Please enter valid values.';
+        return;
+      }
+
+      const pipValue = pips * 10;
+      const lotSize = risk / pipValue;
+
+      document.getElementById('result').textContent = `Recommended Lot Size: ${lotSize.toFixed(2)} lots`;
+    }
+  </script></body>
+</html>
